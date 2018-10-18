@@ -20,9 +20,4 @@ npm run build
 npm run lint
 ```
 
-<iframe
-style="margin-left: 2px; margin-bottom:-5px;"
-frameborder="0" scrolling="0" width="100px" height="20px"
-src="https://github.com/love-mh-forever/vue-examples/vue-source-example/vue.mov" >
-</iframe>
-
+![](https://github.com/love-mh-forever/vue-examples/edit/master/vue-source-example/gif.gif)
