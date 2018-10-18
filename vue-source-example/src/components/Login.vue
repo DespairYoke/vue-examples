@@ -2,7 +2,7 @@
     <div class="inp-box">
     <i-form ref="formInline" :model="formInline" :rules="ruleInline" >
         
-        <FormItem prop="user">
+        <FormItem prop="username">
             <i-input type="text" v-model="formInline.username" placeholder="请输入用户名">
                 <Icon type="ios-person-outline" slot="prepend"></Icon>
             </i-input>
