@@ -20,4 +20,4 @@ npm run build
 npm run lint
 ```
 
-![image](https://github.com/love-mh-forever/vue-examples/blob/master/vue-source-example/gif.gif)
+![image](https://github.com/love-mh-forever/vue-examples/blob/master/uploadimg/gif5.gif)
