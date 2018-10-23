@@ -4,10 +4,6 @@
     <div class="demo-upload-list" v-for="(item,index) in uploadList" :key="index">
         <template v-if="item.status === 'finished'">
             <img :src="item.url">
-            <div class="demo-upload-list-cover">
-                <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-                <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-            </div>
         </template>
         <template v-else>
             <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
@@ -32,13 +28,19 @@
         </div>
     </Upload>
     <Modal title="View Image" v-model="visible">
-        <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
+        <div class="leftside"></div>
+        <img :src="'../static/' + imgName " v-if="visible" style="width: 100%">
+        <div></div>
     </Modal>
   </div>
   <div>
       <div class="demo-upload-list1" v-for="(item,index1) in uploadList" :key="index1">
           <template v-if="item.status === 'finished'">
-              <img :src="item.url">
+              <img :src="item.url" style="width:200px;height:200px">
+              <div class="demo-upload-list-cover">
+                <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
+                <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+            </div>
           </template>
           <template v-else>
               <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
@@ -61,12 +63,17 @@ export default {
           name: "bc7521e033abdd1e92222d733590f104",
           url:
             "https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar"
+        },
+        {
+          name: "1540296302104.jpeg",
+          url:
+            "../static/1540296302104.jpeg"
         }
       ],
       imgName: "",
       visible: false,
       uploadList: [],
-      maxsize: 18
+      maxsize: 1204
     };
   },
   methods: {
@@ -80,7 +87,8 @@ export default {
     },
     handleSuccess(res, file) {
       if (res.status == this.GLOBAL.SUCCESS) {
-        file.url = require('../assets/'+res.content);
+        file.name=res.content;
+        file.url ='../static/'+res.content;
       } else {
         this.$Message.error("fail");
       };
@@ -148,12 +156,30 @@ export default {
 }
 .demo-upload-list-cover i {
   color: #fff;
-  font-size: 20px;
+  font-size: 28px;
   cursor: pointer;
   margin: 0 2px;
+  margin-top: 40%;
 }
 .demo-upload-list1 {
+    display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
   float: left;
+  margin-left: 10px;
   margin-top: 50px;
+}
+.demo-upload-list1:hover .demo-upload-list-cover {
+  display: block;
+  text-align: center;
+}
+.leftside {
+  height: 200px;
+  width: 30px;
+  position: absolute;
+  right: 100px;
+
 }
 </style>

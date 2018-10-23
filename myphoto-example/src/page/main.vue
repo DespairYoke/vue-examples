@@ -10,7 +10,8 @@
                     <span >首页</span>
                 </Header>
                 <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                    <Upload style="margin-top:50px"></Upload>
+                    <!-- <Upload style="margin-top:50px"></Upload> -->
+                    <router-view></router-view>
                 </Content>
             </Layout>
         </Layout>
