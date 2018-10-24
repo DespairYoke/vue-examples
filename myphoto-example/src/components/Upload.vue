@@ -28,17 +28,18 @@
         </div>
     </Upload>
     <Modal title="View Image" v-model="visible">
-        <div class="leftside"></div>
-        <img :src="'../static/' + imgName " v-if="visible" style="width: 100%">
-        <div></div>
+     
+          <Icon color="#fff" class="leftside" type="ios-arrow-back" @click.native="leftlcon()"/>
+        <img :src="'../../Images/' + imgName" v-if="visible" style="width: 100%">
+        <Icon color="#fff" class="rightside" type="ios-arrow-forward" @click.native="rightlcon()"/>
     </Modal>
   </div>
   <div>
-      <div class="demo-upload-list1" v-for="(item,index1) in uploadList" :key="index1">
+      <div v-if="show" class="demo-upload-list1" v-for="(item, index1) in reverseSum" :key="index1">
           <template v-if="item.status === 'finished'">
               <img :src="item.url" style="width:200px;height:200px">
               <div class="demo-upload-list-cover">
-                <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
+                <Icon type="ios-eye-outline" @click.native="handleView(index1,item.name)"></Icon>
                 <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
             </div>
           </template>
@@ -53,33 +54,53 @@
 export default {
   data() {
     return {
+      show:true,
       defaultList: [
         {
-          name: "a42bdcc1178e62b4694c830f028db5c0",
+          name: "1540296822827.jpg",
           url:
-            "https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar"
+            "/static/1540296822827.jpg"
         },
         {
-          name: "bc7521e033abdd1e92222d733590f104",
+          name: "1540296822826.jpg",
           url:
-            "https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar"
+            "/static/1540296822826.jpg"
         },
         {
-          name: "1540296302104.jpeg",
+          name: "1540296822825.jpg",
           url:
-            "../static/1540296302104.jpeg"
+            "/static/1540296822825.jpg"
+        },
+        
+        {
+          name: "1540296822824.jpg",
+          url:
+            "/static/1540296822824.jpg"
         }
       ],
       imgName: "",
       visible: false,
       uploadList: [],
+      currindex: '',
       maxsize: 1204
     };
   },
+  watch:{
+    uploadList(val){
+    
+    }
+  },
+  computed: {
+    reverseSum() {
+      return this.uploadList.reverse();
+    }
+  },
   methods: {
-    handleView(name) {
+    handleView(index1,name) {
       this.imgName = name;
       this.visible = true;
+      this.currindex = index1;
+      console.log(this.currindex);
     },
     handleRemove(file) {
       const fileList = this.$refs.upload.fileList;
@@ -88,7 +109,8 @@ export default {
     handleSuccess(res, file) {
       if (res.status == this.GLOBAL.SUCCESS) {
         file.name=res.content;
-        file.url ='../static/'+res.content;
+        file.url =res.content;
+        
       } else {
         this.$Message.error("fail");
       };
@@ -109,14 +131,31 @@ export default {
       });
     },
     handleBeforeUpload() {
-      const check = this.uploadList.length < 5;
+      const check = this.uploadList.length < 1000;
       if (!check) {
         this.$Notice.warning({
           title: "Up to five pictures can be uploaded."
         });
       }
       return check;
-    }
+    },
+     leftlcon() {
+       if(this.currindex==0) {
+         this.$Message.success("当前已经是第一张啦");
+       }else {
+         this.currindex--;
+         this.imgName=this.uploadList[this.currindex].name;
+       }
+  
+  },
+  rightlcon() {
+    if(this.currindex==this.uploadList.length) {
+         this.$Message.success("当前已是最后一张啦");
+       }else {
+         this.currindex++;
+         this.imgName=this.uploadList[this.currindex].name;
+       }
+  },
   },
   mounted() {
     this.uploadList = this.$refs.upload.fileList;
@@ -176,10 +215,19 @@ export default {
   text-align: center;
 }
 .leftside {
-  height: 200px;
-  width: 30px;
   position: absolute;
-  right: 100px;
-
+  top: 40%;
+  left: -100px;
+  font-size: 100px;
 }
-</style>
+.rightside {
+    position: absolute;
+  top: 40%;
+  right: -100px;
+  font-size: 100px;
+}
+/* 隐藏modal提供的确定 取消 */
+.ivu-btn.ivu-btn-text.ivu-btn-large,.ivu-btn.ivu-btn-primary.ivu-btn-large {
+  display: none;
+}
+</style> 

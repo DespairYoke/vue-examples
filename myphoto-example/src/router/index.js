@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '../page/main.vue'
 import Upload from '../components/Upload.vue'
+import Login from '../components/Login.vue'
+
 
 Vue.use(Router)
 
@@ -18,6 +20,11 @@ export default new Router({
           component: Upload
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
