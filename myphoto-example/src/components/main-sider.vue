@@ -7,14 +7,13 @@
         <Submenu name="1">
             <template slot="title">
                 <Icon type="ios-navigate"></Icon>
-                    Item 1
+                    小项目
             </template>
             <MenuItem name="1-1">
-                <span @click="uploadimg">Option 1</span>
+                <span @click="uploadimg">图片上传</span>
             </MenuItem>
             <MenuItem name="1-2">
-                
-                <span>Option 2</span>
+                <span @click="lucky_wheel">幸运转盘</span>
             </MenuItem>
             <MenuItem name="1-3">
                 <span>Option 3</span>
@@ -61,7 +60,11 @@ export default {
 
     methods: {
         uploadimg() {
-            console.log("zzz")
+            console.log('1111')
+            this.$router.push({path: '/uploadimg'})
+        },
+        lucky_wheel() {
+            this.$router.push({path: '/lucky_wheel'})
         }
     }
 }

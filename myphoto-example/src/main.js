@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 Vue.use(iView)
 Vue.use(VueResource)
 Vue.prototype.GLOBAL = global
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({

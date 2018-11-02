@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '../page/main.vue'
 import Upload from '../components/Upload.vue'
 import Login from '../components/Login.vue'
+import lucky_wheel from '../components/lucky_wheel.vue'
 
 
 Vue.use(Router)
@@ -15,16 +16,17 @@ export default new Router({
       component: Main,
       children: [
         {
-          path: '/',
+          path: 'uploadimg',
           name: 'upload',
           component: Upload
+        },
+        {
+          path: '/lucky_wheel',
+          name: 'lucky_wheel',
+          component: lucky_wheel
         }
       ]
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    }
+   
   ]
 })
