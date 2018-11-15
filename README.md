@@ -8,3 +8,5 @@ vue学习案例
 [登录跳转](https://github.com/love-mh-forever/vue-examples/tree/master/vue-source-example)
 
 [图片上传](https://github.com/love-mh-forever/vue-examples/tree/master/uploadimg)
+
+[父子组件传值](https://github.com/love-mh-forever/vue-examples/tree/master/message-father-child)
