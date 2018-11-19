@@ -1,7 +1,7 @@
 <template>
 	<div class="shoplist_container">
 		<ul  type="1">
-			<router-link :to="{path: 'shop'}" v-for="item in shopListArr" tag="li" :key = "item.id" class="shop_li">
+			<router-link :to="{path: 'shop',query:{id: item.id}}"  v-for="item in shopListArr" tag="li" :key = "item.id" class="shop_li">
 				<section>
 					<img  class="shop_img" :src="item.img">
 				</section>

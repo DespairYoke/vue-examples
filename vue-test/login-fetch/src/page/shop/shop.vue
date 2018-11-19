@@ -297,7 +297,7 @@
         appear
         @after-appear = 'afterEnter'
         @before-appear="beforeEnter"
-        v-for="(item,index) in showMoveDot"
+        v-for="(item,index) in showMoveDot " :key="index"
         >
             <span class="move_dot" v-if="item">
                 <svg class="move_liner">
@@ -317,24 +317,67 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import {msiteAddress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
-    import loading from 'src/components/common/loading'
-    import buyCart from 'src/components/common/buyCart'
-    import ratingStar from 'src/components/common/ratingStar'
-    import {loadMore, getImgPath} from 'src/components/common/mixin'
-    import {imgBaseUrl} from 'src/config/env'
-    import BScroll from 'better-scroll'
+    // import {msiteAddress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
+    import loading from '@/components/common/loading'
+    import buyCart from '@/components/common/buyCart'
+    import ratingStar from '@/components/common/ratingStar'
+    import {loadMore, getImgPath} from '@/components/common/mixin'
+    // import {imgBaseUrl} from 'src/config/env'
+    // import BScroll from 'better-scroll'
 
     export default {
         data(){
             return{
                 geohash: '', //geohash位置信息
-                shopId: null, //商店id值
+                shopId: '', //商店id值
                 showLoading: true, //显示加载动画
                 changeShowType: 'food',//切换显示商品或者评价
-                shopDetailData: null, //商铺详情
+                shopDetailData: {
+                    order_lead_time: "30",
+                    float_delivery_fee: 5,
+                    activities: [{
+                        icon_name: '减',
+                        name: "满减优惠",
+                        description: "满30减5，满60减8",
+                        icon_color: "f07373",
+                        id: 1,
+                        rating: 5,
+                        rating_count: 445,
+                        recent_order_num: 264,
+                        status: 1,
+                    }],
+                    name: "测试11",
+                }, //商铺详情
                 showActivities: false, //是否显示活动详情
-                menuList: [], //食品列表
+                menuList: [
+                    {
+                        name: "热销榜", description: "大家喜欢吃，才叫真好吃。", id: 2406, restaurant_id: 2446,
+                        foods:[{
+                            description: "哈哈哈",
+                            image_path: '',
+                            name: "测试",
+                        }],
+                        icon_url: "5da3872d782f707b4c82ce4607c73d1ajpeg",
+                    },
+                    {
+                        name: "优惠", description: "美味又实惠, 大家快来抢!", id: 2407, restaurant_id: 244,
+                        foods:[{
+                            description: "哈哈哈",
+                            image_path: '',
+                            name: "测试",
+                        }],
+                        icon_url: "4735c4342691749b8e1a531149a46117jpeg",
+                    },
+                    {
+                        name: "sss", description: "aaa", restaurant_id: 2446, id: 3075,
+                        foods:[{
+                            description: "哈哈哈",
+                            image_path: '',
+                            name: "测试",
+                        }],
+                        icon_url: ""
+                    }
+                ], //食品列表
                 menuIndex: 0, //已选菜单索引值，默认为0
                 menuIndexChange: true,//解决选中index时，scroll监听事件重复判断设置index的bug
                 shopListTop: [], //商品列表的高度集合
@@ -362,13 +405,12 @@
                 elLeft: 0, //当前点击加按钮在网页中的绝对top值
                 elBottom: 0, //当前点击加按钮在网页中的绝对left值
                 ratingScroll: null, //评论页Scroll
-                imgBaseUrl,
+                imgBaseUrl:'',
             }
         },
         created(){
             this.geohash = this.$route.query.geohash;
             this.shopId = this.$route.query.id;
-            console.log(this.shopId+"zzz")
             this.INIT_BUYCART();
         },
         mounted(){

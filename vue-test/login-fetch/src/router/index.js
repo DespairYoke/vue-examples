@@ -6,6 +6,7 @@ import msite from '../page/msite/msite'
 import shoplist from '../components/common/shoplist'
 import rateStar  from '../components/common/ratingStar'
 import Food from '../page/food/food'
+import shop from '../page/shop/shop'
 Vue.use(Router)
 
 export default new Router({
@@ -38,6 +39,10 @@ export default new Router({
     {
       path: '/food',
       component: Food
+    },
+    {
+      path: '/shop',
+      component: shop
     }
   ]
 })
